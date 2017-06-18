@@ -12,9 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $categories = App\Category::all();
+    $products = App\Product::orderBy('created_at', 'desc')
+             ->take(10)
+             ->get();
+    return view('welcome')->with('categories', $categories)->with('products', $products);
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/', 'ProductController@store')->name('product.store');
+Route::get('/createProduct', 'ProductController@create')->name('product.create');

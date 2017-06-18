@@ -11,9 +11,9 @@
 
             <div class="col-md-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Accommodation</a>
-                    <a href="#" class="list-group-item">Transportation</a>
-                    <a href="#" class="list-group-item">Technology</a>
+                    @foreach ($categories as $category)
+                      <a href="/{{strtolower($category->title)}}" class="list-group-item">{{$category->title}}</a>
+                    @endforeach
                 </div>
             </div>
 
@@ -50,29 +50,26 @@
 
                 </div>
 
-                <div class="row">
-
+                  @foreach ($products as $key => $product)
+                    @if ($key % 3 == 0)
+                      @if ($key != 0)
+                        </div>
+                      @endif
+                      <div class="row">
+                    @endif
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
+                            <img src="{{$product->image_link}}" alt="" class="img-responsive">
                             <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
+                                <h4 class="pull-right">{{$product->per_hour}}$/h</h4>
+                                <h4><a href="#">{{$product->title}}</a></h4>
+                                <p>{{substr($product->about,0,50)}}...</p>
+                                <p><a href="/{{strtolower($product->category->title)}}">{{$product->category->title}}</a></p>
                             </div>
                         </div>
                     </div>
+                  @endforeach
+
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
@@ -94,8 +91,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-
+                      </div>
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
