@@ -16,7 +16,7 @@ class ProductController extends Controller
    */
   public function __construct()
   {
-      $this->middleware('auth');
+      $this->middleware('auth' , ['except' => 'show']);
   }
 
   public function create()
@@ -37,5 +37,17 @@ class ProductController extends Controller
 
     $product->save();
     return redirect(route('home'));
+  }
+  public function show($id)
+  {
+    $product = Product::find($id);
+    return view('product')->with('product', $product);
+  }
+  public function category($category)
+  {
+    $categoryModel = Category::where('title', ucfirst($category))->first();
+    $categories = Category::all();
+
+    return view('category')->with('categories', $categories)->with('products', $categoryModel->products);
   }
 }

@@ -25,7 +25,7 @@
 }
 
 .caption {
-    height: 130px;
+    height: 150px;
     overflow: hidden;
 }
 
@@ -54,4 +54,20 @@
 
 footer {
     margin: 50px 0;
+}
+
+.rent-btn{
+  margin: 0 0 15px 10px;
+}
+
+.crop {
+    width:  800px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 850px;
+    margin-top:-15%;
+    margin-left:5%;
 }
