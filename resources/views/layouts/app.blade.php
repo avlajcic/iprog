@@ -136,5 +136,6 @@
 
   <!-- Bootstrap Core JavaScript -->
   <script src="{{ secure_asset('js/bootstrap.min.js',array(),true) }}"></script>
+  @yield('scripts')
 </body>
 </html>

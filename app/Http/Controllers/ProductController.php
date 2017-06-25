@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Http\Requests\StoreProduct;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
    */
   public function __construct()
   {
-      $this->middleware('auth' , ['except' => 'show']);
+      $this->middleware('auth' , ['except' => array('show', 'category')]);
   }
 
   public function create()
@@ -34,6 +35,7 @@ class ProductController extends Controller
     $product->per_day = $request->per_day;
     $product->image_link = $request->image_link;
     $product->category_id = $request->category;
+    $product->owner_id = Auth::user()->id;
 
     $product->save();
     return redirect(route('home'));

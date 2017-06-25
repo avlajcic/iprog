@@ -12,7 +12,7 @@
             <div class="col-md-3">
                 <div class="list-group">
                     @foreach ($categories as $category)
-                      <a href="/{{strtolower($category->title)}}" class="list-group-item">{{$category->title}}</a>
+                      <a href="{{route('product.category',strtolower($category->title))}}" class="list-group-item">{{$category->title}}</a>
                     @endforeach
                 </div>
             </div>
