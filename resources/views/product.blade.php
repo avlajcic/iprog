@@ -30,18 +30,20 @@
 
                       <div class="form-div">
                         @if (Auth::check())
-                          <form method = 'post'  id='rentForm'>
+                          <form method = 'post' action="{{route('product.rent')}}" id='rentForm'>
                             {{ csrf_field() }}
                             <div class="radio-inline">
-                              <label><input type="radio" name="type" checked>Per hour</label>
+                              <label><input type="radio" name="type" value="hour" checked>Per hour</label>
                             </div>
                             <div class="radio-inline">
-                              <label><input type="radio" name="type">Per day</label>
+                              <label><input type="radio" name="type" value="day">Per day</label>
                             </div>
                             <div>
                                 <label for="amount">For how long would you like to rent?</label>
                                 <input id="amountID" type='number' class='form-control' name='amount' min='1' max='100' placeholder='Amount of time' required/>
                             </div><br>
+                            <input type="hidden" value="{{$product->user->id}}" name="owner_id">
+                            <input type="hidden" value="{{$product->id}}" name="product_id">
                             <button type='submit' name ='orderButton' class='btn btn-default'>Order</button><br><br>
                             </form>
                           @else
@@ -65,9 +67,7 @@
 <script>
 $( document ).ready( function() {
   $("#rentForm" ).hide();
-	$(".form-div" ).hide();
 	$("#rentButton").click(function(event){
-      $(".form-div" ).toggle(1000);
 		 	$("#rentForm").toggle(1000);
       if ($("#rentForm").is(':visible')) {
          $("html, body").animate({scrollTop: $("#rentForm").offset().top});

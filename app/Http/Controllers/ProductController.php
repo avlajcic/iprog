@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use App\Message;
 use App\Http\Requests\StoreProduct;
 use Auth;
 
@@ -51,5 +52,24 @@ class ProductController extends Controller
     $categories = Category::all();
 
     return view('category')->with('categories', $categories)->with('products', $categoryModel->products);
+  }
+
+  public function rent(Request $request)
+  {
+    $message = new Message;
+    $message->sender = Auth::user()->id;
+    $message->receiver = $request->owner_id;
+    $message->product_id = $request->product_id;
+    if ($request->type == 'hour'){
+      $message->per_hour = true;
+      $message->per_day = false;
+    } else {
+      $message->per_hour = false;
+      $message->per_day = true;
+    }
+    $message->amount = $request->amount;
+
+    $message->save();
+    return redirect(route('home'));
   }
 }

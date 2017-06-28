@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -30,5 +31,14 @@ class HomeController extends Controller
                  ->take(10)
                  ->get();
         return view('welcome')->with('categories', $categories)->with('products', $products);
+    }
+
+    public function messages()
+    {
+        $user = Auth::user();
+        $messagesReceived = $user->messagesReceived;
+        $messagesSent = $user->messagesSent;
+        
+        return view('messages')->with('messagesReceived', $messagesReceived)->with('messagesSent', $messagesSent);
     }
 }

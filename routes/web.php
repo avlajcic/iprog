@@ -22,7 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/messages', 'HomeController@messages')->name('messages');
 Route::post('/', 'ProductController@store')->name('product.store');
 Route::get('/createProduct', 'ProductController@create')->name('product.create');
 Route::get('/product/{id}', 'ProductController@show')->name('product.show');
 Route::get('/category/{category}', 'ProductController@category')->name('product.category');
+Route::post('/rent', 'ProductController@rent')->name('product.rent');
