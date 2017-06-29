@@ -35,6 +35,7 @@
                               </div>
                             </div>
                             @foreach ($messagesReceived as $message)
+                              @continue($message->is_aproved || $message->is_denied)
                               <div class="row">
                                 <div class="col-xs-3">
                                     {{$loop->iteration}}.
@@ -54,12 +55,22 @@
                                     {{$message->amount}}
                                 </div>
                                 <div class="col-xs-2">
-                                  <button type="button" class="btn btn-success" aria-label="Left Align" title="Approve">
-                                    <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                  </button>
-                                  <button type="button" class="btn btn-danger" aria-label="Left Align" title="Deny">
-                                    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                  </button>
+                                  <form action="{{ route('messages.update') }}" method="post" style="float:left">
+                          					 	{{ csrf_field() }}
+                                      <input type="hidden" name="message_id" value="{{$message->id}}">
+                                      <input type="hidden" name="type" value="approve">
+                                      <button type="submit" class="btn btn-success" aria-label="Left Align" title="Approve">
+                                        <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                      </button>
+                                  </form>
+                                  <form action="{{ route('messages.update') }}" method="post" style="float:left">
+                          					 	{{ csrf_field() }}
+                                      <input type="hidden" name="message_id" value="{{$message->id}}">
+                                      <input type="hidden" name="type" value="deny">
+                                      <button type="submit" class="btn btn-danger" aria-label="Left Align" title="Deny">
+                                        <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                      </button>
+                                  </form>
                                 </div>
                               </div>
                               <hr>
@@ -88,9 +99,9 @@
                                 </div>
                                 <div class="col-xs-3">
                                     @if ($message->is_aproved)
-                                      Approved
+                                      <p style="text-color:green">Approved</p>
                                     @elseif($message->is_denied)
-                                      Denied
+                                      <p style="text-color:red">Denied</p>
                                     @else
                                       Not responed
                                     @endif
@@ -106,9 +117,14 @@
                                     {{$message->amount}}
                                 </div>
                                 <div class="col-xs-2">
-                                  <button type="button" class="btn btn-danger" aria-label="Left Align" title="Cancel">
-                                    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                  </button>
+                                  <form action="{{ route('messages.update') }}" method="post">
+                          					 	{{ csrf_field() }}
+                                      <input type="hidden" name="message_id" value="{{$message->id}}">
+                                      <input type="hidden" name="type" value="cancel">
+                                      <button type="submit" class="btn btn-danger" aria-label="Left Align" title="Cancel">
+                                        <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                      </button>
+                                  </form>
                                 </div>
                               </div>
                               <hr>

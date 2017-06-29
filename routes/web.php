@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/messages', 'HomeController@messages')->name('messages');
+Route::post('/messages/update', 'HomeController@messagesUpdate')->name('messages.update');
 Route::post('/', 'ProductController@store')->name('product.store');
 Route::get('/createProduct', 'ProductController@create')->name('product.create');
 Route::get('/product/{id}', 'ProductController@show')->name('product.show');
