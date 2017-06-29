@@ -99,9 +99,9 @@
                                 </div>
                                 <div class="col-xs-3">
                                     @if ($message->is_aproved)
-                                      <p style="text-color:green">Approved</p>
+                                      <p style="color:green">Approved</p>
                                     @elseif($message->is_denied)
-                                      <p style="text-color:red">Denied</p>
+                                      <p style="color:red">Denied</p>
                                     @else
                                       Not responed
                                     @endif
