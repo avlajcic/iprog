@@ -12,7 +12,7 @@
             <div class="col-md-3">
                 <div class="list-group">
                     @foreach ($categories as $category)
-                      <a href="{{route('product.category',strtolower($category->title))}}" class="list-group-item">{{$category->title}}</a>
+                      <a href="{{route('product.category',$category->id)}}" class="list-group-item">{{$category->title}}</a>
                     @endforeach
                 </div>
             </div>
@@ -29,11 +29,11 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                @for ($i = 0; $i < 3; $i++)
+                                @for ($i = 0; $i < (count($products) < 3 ? count($products) : 3); $i++)							
                                   <div class="item {!! ($i == 0) ? 'active': '' !!}">
                                     <div class="crop">
                                       <a href="{{route('product.show', $products[$i]->id)}}">
-                                        <img class="slide-image" src="{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}">
+                                        <img class="slide-image" src="images/{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}">
                                       </a>
                                     </div>
                                   </div>
@@ -59,7 +59,7 @@
                     @endif
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
                         <div class="thumbnail">
-                            <img src="{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}" class="img-responsive" style="max-height:165px">
+                            <img src="images/{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}" class="img-responsive" style="max-height:165px">
                             <div class="caption">
                                 <h4><a href="{{route('product.show', $products[$i]->id)}}">{{$products[$i]->title}}</a></h4>
                                 <h4>{{$products[$i]->per_hour}}$/h</h4>
@@ -69,10 +69,10 @@
                         </div>
                     </div>
                   @endfor
-                </div>
-
+                </div>		
+				{{$products->render()}}
             </div>
-
+			
         </div>
 
     </div>

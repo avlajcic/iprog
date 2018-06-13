@@ -11,13 +11,13 @@
     <title>Internet programiranje</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{{ secure_asset('css/bootstrap.min.css',array(),true) }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css',array(),true) }}" rel="stylesheet">
 
 
     <!-- Styles -->
     <style>
         html, body {
-            background-color: #fff;
+            background-color: #f7f8f9;
             color: #636b6f;
             font-weight: 100;
             height: 100vh;
@@ -51,7 +51,7 @@
         .title {
             font-size: 84px;
         }
-
+		
         li > a {
             color: #636b6f;
             padding: 0 25px;y
@@ -102,6 +102,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li><a href="{{ route('product.products', Auth::user()->id )}}">Products</a></li>
                             <li><a href="{{ route('messages' )}}">Messages</a></li>
                             <li><a href="{{ route('product.create' )}}">Add new product</a></li>
                             <li class="dropdown">
@@ -133,10 +134,10 @@
     </div>
 
     <!-- jQuery -->
-  <script src="{{ secure_asset('js/jquery.js',array(),true) }}"></script>
+  <script src="{{ asset('js/jquery.js',array(),true) }}"></script>
 
   <!-- Bootstrap Core JavaScript -->
-  <script src="{{ secure_asset('js/bootstrap.min.js',array(),true) }}"></script>
+  <script src="{{ asset('js/bootstrap.min.js',array(),true) }}"></script>
   @yield('scripts')
 </body>
 </html>

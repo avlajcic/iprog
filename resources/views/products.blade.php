@@ -29,25 +29,28 @@
                     @endif
                     <div class="col-xs-6">
                         <div class="thumbnail">
-                            <img src="{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}" class="img-responsive" style="max-height:165px">
+                            <img src="/images/{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}" class="img-responsive" style="max-height:165px">
                             <div class="caption">
                                 <h4><a href="{{route('product.show', $products[$i]->id)}}">{{$products[$i]->title}}</a></h4>
                                 <h4>{{$products[$i]->per_hour}}$/h</h4>
                                 <p>{{substr($products[$i]->about,0,50)}}...</p>
                                 <p><a href="/{{strtolower($products[$i]->category->title)}}">{{$products[$i]->category->title}}</a></p>
                             </div>
+							@if (Auth::user() == $products[$i]->user)
+								 <a class="btn btn-primary edit-btn" href="{{route('product.edit', $products[$i]->id)}}">Edit</a>
+							@endif
                         </div>
                     </div>
                   @endfor
 				@else 
-					<h2>There are no products for selected category.</h2>
+					<h2>There are no products for selected user.</h2>
 				@endif
                 </div>
-
+				{{$products->render()}}
             </div>
-
+			
         </div>
-
+		
     </div>
     <!-- /.container -->
 

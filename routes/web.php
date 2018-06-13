@@ -13,9 +13,7 @@
 
 Route::get('/', function () {
     $categories = App\Category::all();
-    $products = App\Product::orderBy('created_at', 'desc')
-             ->take(10)
-             ->get();
+    $products = App\Product::orderBy('created_at', 'desc')->paginate(5);
     return view('welcome')->with('categories', $categories)->with('products', $products);
 });
 
@@ -27,5 +25,7 @@ Route::post('/messages/update', 'HomeController@messagesUpdate')->name('messages
 Route::post('/', 'ProductController@store')->name('product.store');
 Route::get('/createProduct', 'ProductController@create')->name('product.create');
 Route::get('/product/{id}', 'ProductController@show')->name('product.show');
+Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
+Route::get('/products/{id}', 'ProductController@products')->name('product.products');
 Route::get('/category/{category}', 'ProductController@category')->name('product.category');
 Route::post('/rent', 'ProductController@rent')->name('product.rent');

@@ -28,9 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::orderBy('created_at', 'desc')
-                 ->take(10)
-                 ->get();
+        $products = Product::orderBy('created_at', 'desc')->paginate(5);
         return view('welcome')->with('categories', $categories)->with('products', $products);
     }
 

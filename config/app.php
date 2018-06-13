@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://internet-programiranje.herokuapp.com/'),
+    'url' => env('APP_URL', 'http://internet-programiranje.herokuapp.com/'),
 
     /*
     |--------------------------------------------------------------------------

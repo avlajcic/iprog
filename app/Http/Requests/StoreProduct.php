@@ -35,7 +35,6 @@ class StoreProduct extends FormRequest
           'about' => 'required|min:15',
           'per_hour' => 'required|numeric',
           'per_day' => 'required|numeric',
-          'image_link' => 'required|url',
           'category' => 'required|numeric',
       ];
     }

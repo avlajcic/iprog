@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function products()
    {
-       return $this->hasMany('App\Product');
+       return $this->hasMany('App\Product', 'owner_id');
    }
 
    public function messagesReceived()
