@@ -14,7 +14,7 @@ class AddOwnerForProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-          $table->integer('owner_id')->default('1');
+          $table->integer('owner_id')->default('1')->unsigned();
           $table->foreign('owner_id')->references('id')->on('users')->onDelete('restrict');
         });
     }

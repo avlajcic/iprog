@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->double('per_hour');
             $table->double('per_day');
             $table->string('image_link');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
         });
     }
