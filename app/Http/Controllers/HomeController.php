@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Message;
+use App\Rent;
 use Auth;
 
 class HomeController extends Controller
@@ -45,9 +46,17 @@ class HomeController extends Controller
     {
         $message = Message::find($request->message_id);
         if ($request->type == 'approve'){
+
           $message->is_aproved = true;
           $message->is_denied = false;
           $message->save();
+
+          $rent = new Rent();
+          $rent->renter = $message->senderModel->id;
+          $rent->product_id = $message->product_id;
+          $rent->from = $message->from;
+          $rent->to = $message->to;
+          $rent->save();
         }else if($request->type == 'deny'){
           $message->is_aproved = false;
           $message->is_denied = true;

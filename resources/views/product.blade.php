@@ -22,7 +22,7 @@
                             <p>{{$product->about}}</p>
                         </div>
                         <br>
-                      @if (Auth::user() != $product->user)                
+                      @if (Auth::user() != $product->user)
                         <button class="btn btn-primary rent-btn" id="rentButton">Rent</button>
                       @endif
 
@@ -40,6 +40,18 @@
                                 <label for="amount">For how long would you like to rent?</label>
                                 <input id="amountID" type='number' class='form-control' name='amount' min='1' max='100' placeholder='Amount of time' required/>
                             </div><br>
+                            @if (count($product->rents) > 0)
+                            <h3 style="color:red">Not avaliable on:</h3>
+                            @endif
+                            @foreach ($product->rents as $rent)
+                              <p>{{$rent->from}} - {{$rent->to}} </p>
+                            @endforeach
+                            <label for="from">From:</label>
+                            <input id="from" type="datetime-local" name="from" class="form-control" required>
+
+                            <label for="to">To:</label>
+                            <input id="to" type="datetime-local" name="to" class="form-control" required>
+
                             <input type="hidden" value="{{$product->user->id}}" name="owner_id">
                             <input type="hidden" value="{{$product->id}}" name="product_id">
                             <button type='submit' name ='orderButton' class='btn btn-default'>Order</button><br><br>

@@ -22,4 +22,9 @@ class Product extends Model
   {
       return $this->hasMany('App\Message');
   }
+
+  public function rents()
+ {
+     return $this->hasMany('App\Rent');
+ }
 }

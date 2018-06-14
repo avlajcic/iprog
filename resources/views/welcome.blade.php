@@ -29,7 +29,7 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                @for ($i = 0; $i < (count($products) < 3 ? count($products) : 3); $i++)							
+                                @for ($i = 0; $i < (count($products) < 3 ? count($products) : 3); $i++)
                                   <div class="item {!! ($i == 0) ? 'active': '' !!}">
                                     <div class="crop">
                                       <a href="{{route('product.show', $products[$i]->id)}}">
@@ -64,15 +64,15 @@
                                 <h4><a href="{{route('product.show', $products[$i]->id)}}">{{$products[$i]->title}}</a></h4>
                                 <h4>{{$products[$i]->per_hour}}$/h</h4>
                                 <p>{{substr($products[$i]->about,0,50)}}...</p>
-                                <p><a href="{{route('product.category',strtolower($products[$i]->category->title))}}">{{$products[$i]->category->title}}</a></p>
+                                <p><a href="{{route('product.category', $products[$i]->category->id)}}">{{$products[$i]->category->title}}</a></p>
                             </div>
                         </div>
                     </div>
                   @endfor
-                </div>		
+                </div>
 				{{$products->render()}}
             </div>
-			
+
         </div>
 
     </div>

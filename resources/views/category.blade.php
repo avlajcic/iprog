@@ -19,7 +19,7 @@
 
             <div class="col-md-9">
 
-				@if (count($products) != 0)		
+				@if (count($products) != 0)
                   @for ($i = 0; $i < count($products); $i++)
                     @if ($i % 2 == 0)
                       @if ($i != 0)
@@ -29,7 +29,7 @@
                     @endif
                     <div class="col-xs-6">
                         <div class="thumbnail">
-                            <img src="{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}" class="img-responsive" style="max-height:165px">
+                            <img src="/images/{{$products[$i]->image_link}}" alt="{{$products[$i]->title}}" class="img-responsive" style="max-height:165px">
                             <div class="caption">
                                 <h4><a href="{{route('product.show', $products[$i]->id)}}">{{$products[$i]->title}}</a></h4>
                                 <h4>{{$products[$i]->per_hour}}$/h</h4>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                   @endfor
-				@else 
+				@else
 					<h2>There are no products for selected category.</h2>
 				@endif
                 </div>

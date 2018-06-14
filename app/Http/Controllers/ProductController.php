@@ -38,7 +38,7 @@ class ProductController extends Controller
 			$imageName = time().'.'.$request->image->getClientOriginalExtension();
 			$request->image->move(public_path('images'), $imageName);
 			$product->image_link = $imageName;
-		} 
+		}
 	}else{
 		$product = new Product;
 		$imageName = time().'.'.$request->image->getClientOriginalExtension();
@@ -48,7 +48,7 @@ class ProductController extends Controller
 	$product->title = $request->title;
     $product->about = $request->about;
     $product->per_hour = $request->per_hour;
-    $product->per_day = $request->per_day;	
+    $product->per_day = $request->per_day;
     $product->category_id = $request->category;
     $product->owner_id = Auth::user()->id;
 
@@ -82,6 +82,18 @@ class ProductController extends Controller
       $message->per_day = true;
     }
     $message->amount = $request->amount;
+    $message->amount = $request->amount;
+    $message->amount = $request->amount;
+
+    $from = new \DateTime($request->from);
+    $to =  new \DateTime($request->to);
+    if ($to < $from){
+      $temp = $from;
+      $from = $to;
+      $to = $temp;
+    }
+    $message->from = $from;
+    $message->to = $to;
 
     $message->save();
     return redirect(route('home'));
@@ -91,7 +103,7 @@ class ProductController extends Controller
   {
     $products = Product::where('owner_id', $id)->paginate(10);
 	$categories = Category::all();
-		
+
     return view('products')->with('categories', $categories)->with('products', $products);
   }
 
